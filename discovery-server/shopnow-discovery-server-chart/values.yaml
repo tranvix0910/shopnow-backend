@@ -12,7 +12,6 @@ image:
   repository: ""
   tag: "v1"
   pullPolicy: Always
-  pullSecret: "shopnow-registry-secret" 
 
 replicaCount: 1
 rollingUpdate:
