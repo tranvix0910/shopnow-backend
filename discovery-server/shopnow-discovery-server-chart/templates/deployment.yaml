@@ -24,9 +24,7 @@ spec:
             - name: config-volume
               mountPath: /app/src/main/resources/application.properties
               subPath: application.properties
-      {{- end }}
-      imagePullSecrets:
-        - name: {{ .Values.image.pullSecret }}
+          {{- end }}
       dnsPolicy: ClusterFirst
       restartPolicy: Always
       {{- if .Values.global.enabledComponents.configmap }}

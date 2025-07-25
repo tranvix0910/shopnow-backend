@@ -9,7 +9,7 @@ spec:
     server: https://kubernetes.default.svc
   source:
     path: discovery-server/shopnow-discovery-server-chart
-    repoURL: https://github.com/tranvix0910/shopnow-discovery-server.git
+    repoURL: https://github.com/tranvix0910/shopnow-backend.git
     targetRevision: main
     helm:
       valueFiles:
