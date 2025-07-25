@@ -1,0 +1,49 @@
+# Global settings
+global:
+  appName: "shopnow-discovery-server"       
+  namespace: "shopnow"        
+  enabledComponents:
+    configmap: true          
+    service: true            
+    ingress: true             
+
+# Deployment
+image:
+  repository: "harbor.tranvix.click/shopnow/service-discovery"
+  tag: "v1"
+  pullPolicy: Always
+  pullSecret: "shopnow-registry-secret" 
+
+replicaCount: 1
+rollingUpdate:
+  maxSurge: 25%
+  maxUnavailable: 25%
+
+service:
+  type: ClusterIP
+  port: 8761
+  targetPort: 8761
+
+ingress:
+  className: "nginx"
+  host: "discovery-server-shopnow.tranvix.click"
+  path: "/"
+  pathType: Prefix
+
+configmap:
+  data:
+    application.properties: |
+      spring.application.name=discovery-server
+      server.port=8761
+      eureka.client.register-with-eureka=false
+      eureka.client.fetch-registry=false
+
+serviceAccount:
+  create: false
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+  targetMemoryUtilizationPercentage: 80
