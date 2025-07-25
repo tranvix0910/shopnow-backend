@@ -9,7 +9,7 @@ global:
 
 # Deployment
 image:
-  repository: "harbor.tranvix.click/shopnow/service-discovery"
+  repository: ""
   tag: "v1"
   pullPolicy: Always
   pullSecret: "shopnow-registry-secret" 
@@ -25,18 +25,18 @@ service:
   targetPort: 8761
 
 ingress:
-  className: "nginx"
+  className: "alb"
   host: "discovery-server-shopnow.tranvix.click"
   path: "/"
   pathType: Prefix
+  certificateArn: ""
+  subnets: ""
+  listenPorts: ""
+  groupName: ""
+  actionsSslRedirect: ""
 
 configmap:
-  data:
-    application.properties: |
-      spring.application.name=discovery-server
-      server.port=8761
-      eureka.client.register-with-eureka=false
-      eureka.client.fetch-registry=false
+  data: {}
 
 serviceAccount:
   create: false
