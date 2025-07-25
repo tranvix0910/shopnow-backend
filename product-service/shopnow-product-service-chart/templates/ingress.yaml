@@ -4,6 +4,14 @@ kind: Ingress
 metadata:
   name: {{ .Values.global.appName }}-ingress
   namespace: {{ .Values.global.namespace }}
+  annotations:
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/certificate-arn: {{ .Values.ingress.certificateArn | quote }}
+    alb.ingress.kubernetes.io/subnets: {{ .Values.ingress.subnets | quote }}
+    alb.ingress.kubernetes.io/listen-ports: {{ .Values.ingress.listenPorts | quote }}
+    alb.ingress.kubernetes.io/group.name: {{ .Values.ingress.groupName | quote }}
+    alb.ingress.kubernetes.io/actions.ssl-redirect: {{ .Values.ingress.actionsSslRedirect | quote }}
 spec:
   ingressClassName: {{ .Values.ingress.className }}
   rules:
